@@ -3,7 +3,8 @@ Project for Interview
 1. How to run
     * Get code
        - Open folder to save source
-       - Use this "git clone https://github.com/duyenpham0112230/Interview.git"
+       - Right mouse and choose option "Git Bash Here"
+       - Enter "git clone https://github.com/duyenpham0112230/Interview.git"
     * Open file "Market Price.sln"(Interview/Market Price) in Visual Studio 2019
     * Ctrl + F5 to Build
 2. Details
