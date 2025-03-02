@@ -4,6 +4,21 @@ function fnPriceMarket() {
         _dataTable: $("#tblMarketPrice").DataTable({
             pageLength: 100,
             lengthMenu: [25, 50, 100, 150],
+            columnDefs: [
+                {
+                    targets: [0],
+                    render: function (data, type, row) {
+                        if (type == 'display') {
+                            return row[2];
+                        }
+                        if (type === 'sort') {
+                            return row[0];
+                        }
+                        return data;
+                    }
+
+                }
+            ],
             drawCallback: function (settings) {
                 let api = this.api();
                 if (window['oPriceMarket'] && typeof (window['oPriceMarket'].drawCallbackCustom) == 'function') {
@@ -118,7 +133,7 @@ function fnPriceMarket() {
             if (cntTable > 100) {
                 let pageCurrent = api.rows({ page: 'current' }).data().toArray();
                 if (pageCurrent && pageCurrent.length > 0) {
-                    let dateFilter = pageCurrent[0][0].split(' ')[0];
+                    let dateFilter = pageCurrent[0][2].split(' ')[0];
                     let dataDateCurrent = me.PriceMarketData.data.filter(x => x.Date.includes(dateFilter));
                     $(me.rootSelector + ' input[type=date]').val(me.fomatDate(dateFilter, 'yyyy-MM-dd', 'dd/MM/yyyy'));
                     me.renderGraph(dataDateCurrent, dateFilter);
@@ -128,7 +143,7 @@ function fnPriceMarket() {
                 let dataArray = api.rows({ filter: 'applied' }).data().toArray();
                 let fromDate = new Date(), toDate = new Date();
                 if (dataArray.length > 0) {
-                    fromDate = me.fomatDate(dataArray[0][0].split(' ')[0], 'yyyy-MM-dd');
+                    fromDate = me.fomatDate(dataArray[0][2].split(' ')[0], 'yyyy-MM-dd');
                     toDate = me.fomatDate(dataArray[dataArray.length - 1][0].split(' ')[0], 'yyyy-MM-dd');
                 }
                 $(me.rootSelector + ' input[name=FromDate]').val(fromDate);
@@ -150,6 +165,11 @@ function fnPriceMarket() {
                 success: function (result) {
                     $(me.rootSelector + ' .div-data').show();
                     me.PriceMarketData = result;
+                    if (me.PriceMarketData.data) {
+                        me.PriceMarketData.data.forEach(function (item) {
+                            item.DateTime = me.parseDateTime(item.Date);
+                        })
+                    }
                     me.renderTable();
                     me.renderStatistic();
                     //me.renderGraph();
@@ -164,7 +184,7 @@ function fnPriceMarket() {
             let me = this;
             me._dataTable.clear();
             if (me.PriceMarketData && me.PriceMarketData.data) {
-                let dataArray = me.PriceMarketData.data.map(x => [x.Date, x.Price]);
+                let dataArray = me.PriceMarketData.data.map(x => [x.DateTime, x.Price, x.Date]);
                 me._dataTable.rows.add(dataArray).draw();
             }
         },
@@ -243,11 +263,11 @@ function fnPriceMarket() {
             let dataGraph = [...me.PriceMarketData.data];
             let textDateFilter = [];
             if (fromDate) {
-                dataGraph = dataGraph.filter(x => me.parseDateTime(x.Date) >= me.parseDateTime(fromDate));
+                dataGraph = dataGraph.filter(x => x.DateTime >= me.parseDateTime(fromDate));
                 textDateFilter.push(fromDate);
             }
             if (toDate) {
-                dataGraph = dataGraph.filter(x => me.parseDateTime(x.Date) <= me.parseDateTime(toDate));
+                dataGraph = dataGraph.filter(x => x.DateTime <= me.parseDateTime(toDate));
                 textDateFilter.push(toDate);
             }
             textDateFilter = textDateFilter.join(' - ');
