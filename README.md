@@ -14,7 +14,7 @@ Project for Interview
       - Click header of column to Sort follow this column
       - Result:
           + Minimum price, Average price, Maximum price
-          + Most expensive and Least hour window
+          + Most and Least expensive hour window
           + A table of Data paging
           + A Line Graph (data in one day - fisrt record in table)
     * Graph
