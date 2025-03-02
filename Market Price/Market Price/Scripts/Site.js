@@ -17,6 +17,10 @@ function fnPriceMarket() {
                         return data;
                     }
 
+                },
+                {
+                    targets: [2],
+                    visible: false
                 }
             ],
             drawCallback: function (settings) {
@@ -141,14 +145,13 @@ function fnPriceMarket() {
             }
             else {
                 let dataArray = api.rows({ filter: 'applied' }).data().toArray();
-                let fromDate = new Date(), toDate = new Date();
                 if (dataArray.length > 0) {
-                    fromDate = me.fomatDate(dataArray[0][2].split(' ')[0], 'yyyy-MM-dd');
-                    toDate = me.fomatDate(dataArray[dataArray.length - 1][0].split(' ')[0], 'yyyy-MM-dd');
+                    let fromDate = me.fomatDate(dataArray[0][2].split(' ')[0], 'yyyy-MM-dd', 'dd/MM/yyyy');
+                    let toDate = me.fomatDate(dataArray[dataArray.length - 1][2].split(' ')[0], 'yyyy-MM-dd', 'dd/MM/yyyy');
+                    $(me.rootSelector + ' input[name=FromDate]').val(fromDate);
+                    $(me.rootSelector + ' input[name=ToDate]').val(toDate);
+                    me.renderGraph(dataArray);
                 }
-                $(me.rootSelector + ' input[name=FromDate]').val(fromDate);
-                $(me.rootSelector + ' input[name=ToDate]').val(toDate);
-                me.renderGraph(dataArray);
             }
         },
 
@@ -195,7 +198,7 @@ function fnPriceMarket() {
             //}
             let labels, prices;
             if (dataGraph[0] instanceof Array) {
-                labels = dataGraph.map(item => item[0]);
+                labels = dataGraph.map(item => item[2]);
                 prices = dataGraph.map(item => item[1]);
             }
             else {
