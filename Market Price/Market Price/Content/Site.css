@@ -1,0 +1,138 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+label {
+    margin-left: 5px;
+}
+
+.btn {
+    border: 1px solid #eee;
+    outline: none !important;
+}
+
+.d-none {
+    display: none !important;
+}
+
+.d-flex {
+    display: flex;
+}
+
+
+.a-i-center {
+    align-items: center;
+}
+
+.mt-20 {
+    margin-top: 20px;
+}
+
+.ml-20 {
+    margin-left: 20px;
+}
+
+.mr-20 {
+    margin-right: 20px;
+}
+
+.pr-8 {
+    padding-right: 8px;
+}
+
+.f-bold {
+    font-weight: bold;
+}
+
+.j-c-spbetween {
+    justify-content: space-between;
+}
+
+.w-1\/2 {
+    width: 50%;
+}
+
+table td {
+    text-align: left !important;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+#tblMarketPrice_wrapper {
+    max-height: 500px;
+    overflow-y: auto;
+    padding-right: 8px;
+}
+
+    #tblMarketPrice_wrapper .dt-layout-row:first-child {
+        position: sticky;
+        top: 0;
+        margin: 0;
+        background-color: #fff;
+        padding: 10px 0;
+    }
+
+    #tblMarketPrice_wrapper .dt-layout-table + .dt-layout-row {
+        position: sticky;
+        bottom: -0.5px;
+        background-color: #fff;
+        padding-top: 10px;
+    }
+
+    #tblMarketPrice_wrapper thead {
+        position: sticky;
+        top: 51px;
+    }
+
+    #tblMarketPrice_wrapper th {
+        text-align: left !important;
+        background-color: #ddd;
+        color: #fff;
+        border-right: 1px solid rgba(0, 0, 0, 0.3);
+    }
+
+.price-market .hour-window {
+    max-height: 40px;
+    overflow: hidden;
+    padding-right: 20px;
+}
+
+div.dt-container div.dt-layout-row {
+    margin: 0 !important;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    border-radius: 6px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #eee;
+    border-radius: 10px;
+}
+
+@media screen and (max-width: 767px) {
+
+    #tblMarketPrice_wrapper thead {
+        position: sticky;
+        top: 101px;
+    }
+}

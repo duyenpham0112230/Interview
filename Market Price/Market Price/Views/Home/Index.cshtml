@@ -1,0 +1,55 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="price-market">
+    @* Choose file *@
+    <div class="div-path d-flex a-i-center">
+        <label for="filePath" class="btn mr-20">Select a file</label>
+        <span id="fileName">No file chosen</span>
+        <input id="filePath" type="file" name="FilePath" class="d-none" />
+    </div>
+    @* Result *@
+    <div class="div-data" style="display: none;">
+        <h1>Data Visualization</h1>
+        @* Table *@
+        <div class="div-table">
+            <table class="tbl-market-price" id="tblMarketPrice">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Market Price EX1</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        @* Statistic *@
+        <div class="div-statistics">
+            <div class="d-flex j-c-spbetween mt-20 pr-8">
+                <div>Minimum price: <span class="min-value f-bold"></span></div>
+                <div>Maximum price: <span class="max-value f-bold"></span></div>
+                <div>Average price: <span class="avg-value f-bold"></span></div>
+            </div>
+            <div class="d-flex mt-20 pr-8">
+                <div class="most-expensive w-1/2">
+                    <div>Most expensive hour window: <span class="most-value f-bold"></span></div>
+                    <div class="most-position hour-window"></div>
+                </div>
+                <div class="least-expensive w-1/2">
+                    <div>Least expensive hour window: <span class="least-value f-bold"></span></div>
+                    <div class="least-position hour-window"></div>
+                </div>
+            </div>
+        </div>
+        @* Chart *@
+        <div class="div-chart">
+            <div class="d-flex j-c-spbetween mt-20 pr-8">
+                <span class="from-date">From date <input type="date" name="FromDate" lang="en" /></span>
+                <span class="to-date">To date <input type="date" name="ToDate" lang="en" /></span>
+                <button class="btn" id="viewGraph">View Graph</button>
+            </div>
+            <canvas class="pr-8" id="chart-marketprice" style="width:100%;"></canvas>
+        </div>
+
+    </div>
+</div>
